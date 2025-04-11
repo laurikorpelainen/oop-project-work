@@ -1,0 +1,12 @@
+Movie booking app
+
+Create python app that allows users to book seats in a movie theater for a specific movie.
+
+a)	Create cinemachain class
+b)	Movietheater class will act as individual theater
+c)	Moviehall class is a single hall in a movie theater
+d)	Create multiple different moviehall classes that will inherit from moviehall class
+e)	Movie class will represent movies
+f)	User class will create a user that can reserve specific seats in moviehall screening specific movies
+g)	Create a booking class that will manage all the reservations
+h)	Optional: create a user interface for the app.
