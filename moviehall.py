@@ -16,3 +16,9 @@ class MovieHall:
     @property
     def seats(self):
         return self.__seats
+    
+    def reserve_seat(self, seat_number):
+        self.__seats[seat_number].reserve_seat()
+
+    def display_seats(self):
+        print([str(seat) for seat in self.__seats])
