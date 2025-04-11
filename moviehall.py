@@ -13,7 +13,7 @@ class MovieHall:
 
     @property
     def id(self):
-        return self.__id
+        return self.__id_counter
     
     @property
     def seats(self):
@@ -24,6 +24,6 @@ class MovieHall:
 
     def display_seats(self):
         print([str(seat) for seat in self.__seats])
-        
+
     def __str__(self):
         return f"Moviehall ID: {self.__id_counter}, Moviehall type: {self.__type}"
