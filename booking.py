@@ -49,9 +49,9 @@ class Booking:
         
         # Check if seats are valid and available
         for row, col in seats:
-            if row < 0 or col < 0 or row >= len(screening["hall"].seats) or col >= len(screening["hall"].seats[0]):
+            if row < 0 or col < 0 or row >= (len(screening["hall"].seats) + 1) or col >= (len(screening["hall"].seats[0]) + 1):
                 return None, "Invalid seat position"
-            if screening["hall"].seats[row][col].__str__() == "1":
+            if screening["hall"].seats[row - 1][col - 1].__str__() == "1":
                 return None, "One or more seats are already reserved"
         
         # Reserve a seat
