@@ -36,29 +36,36 @@ def main():
         print("2. Select theater")
         print("3. Book tickets")
         print("4. View user bookings")
+        print("5. Display available seats")
         print("0. Exit\n")
 
         choice = input("Enter your choice: ")
         
         if choice == "1":
+
             name = input("Enter name: ")
             age = int(input("Enter age: "))
             user = app.register_user(User(name, age))
+
             print(f"User registered: {user}")
-            
+        
+
         elif choice == "2":
+
             print("Available theaters:")
             for i, theater in enumerate(app.get_theaters()):
                 print(f"{i+1}. {theater.name} ({theater.city})")
+
             theater_idx = int(input("Select theater (number): ")) - 1
             selected_theater = app.get_theaters()[theater_idx]
             print(f"Selected theater: {selected_theater.name} ({selected_theater.city})")
-            
+        
+
         elif choice == "3":
+
             if not app.get_users():
                 print("No users registered. Please register a user first.")
                 continue
-                
             if not selected_theater:
                 print("No theater selected. Please select a theater first.")
                 continue
@@ -66,8 +73,9 @@ def main():
             print("Available users:")
             for i, user in enumerate(app.get_users()):
                 print(f"{i+1}. {user.name} (Age: {user.age})")
+
             user_idx = int(input("Select user (number): ")) - 1
-            
+
             screenings = app.get_screenings(selected_theater)
             available_movies = list({screening['movie'] for screening in screenings})
             
@@ -78,6 +86,7 @@ def main():
             print("Available movies:")
             for i, movie in enumerate(available_movies):
                 print(f"{i+1}. {movie.title}")
+
             movie_idx = int(input("Select movie (number): ")) - 1
             selected_movie = available_movies[movie_idx]
             
@@ -86,9 +95,10 @@ def main():
             print("Available screenings:")
             for i, screening in enumerate(movie_screenings):
                 print(f"{i+1}. {app.format_screening_str(screening)}")
+
             screening_idx = int(input("Select screening (number): ")) - 1
-            
             selected_screening = movie_screenings[screening_idx]
+
             print("Current seat reservation (0 = available, 1 = reserved):")
             selected_screening["hall"].display_seats()
             
@@ -96,32 +106,43 @@ def main():
             seats = []
             
             for i in range(num_seats):
+
                 row = int(input(f"Enter row for seat {i+1}: "))
                 col = int(input(f"Enter column for seat {i+1}: "))
                 seats.append((row, col))
             
             booking, message = app.create_booking(app.get_users()[user_idx], selected_screening, seats)
             print(message)
+
             if booking:
                 print(f"Booking created: {app.format_booking_str(booking)}")
-            
+
+
         elif choice == "4":
+
             print("Available users:")
             for i, user in enumerate(app.get_users()):
                 print(f"{i+1}. {user.name}")
+
             user_idx = int(input("Select user (number): ")) - 1
-            
             bookings = app.get_user_bookings(app.get_users()[user_idx])
             print(f"Bookings for {app.get_users()[user_idx].name}:")
+
             if not bookings:
                 print("No bookings found")
             else:
                 for booking in bookings:
                     print(app.format_booking_str(booking))
-                    
+
+
+        elif choice == "5":
+            selected_screening["hall"].display_seats()
+
+
         elif choice == "0":
             print("Thank you for using the Movie Booking App!")
             break 
+         
          
         else:
             print("Invalid choice, please try again")
