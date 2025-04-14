@@ -1,5 +1,5 @@
 class User:
-    __id_counter = 1
+    __id_counter = 0
 
     def __init__(self, name: str, age: int):
         self.__name = name

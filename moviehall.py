@@ -1,12 +1,12 @@
 from seat import Seat
 class MovieHall:
-    __id_counter = 1
+    __id_counter = 0
 
-    def __init__(self, type, rows: int, collumns: int):
+    def __init__(self, type, rows: int, columns: int):
         self.__type = type # Type will be child class
         self.__rows = rows
-        self.__collumns = collumns
-        self.__seats = [[Seat(row, collum) for collum in range(self.__collumns)] for row in range(self.__rows)]
+        self.__columns = columns
+        self.__seats = [[Seat(row, column) for column in range(self.__columns)] for row in range(self.__rows)]
         MovieHall.__id_counter += 1
     
     @property
@@ -21,8 +21,8 @@ class MovieHall:
     def seats(self):
         return self.__seats
     
-    def reserve_seat(self, row, collumn):
-        self.__seats[row][collumn].reserve_seat()
+    def reserve_seat(self, row, column):
+        self.__seats[row][column].reserve_seat()
 
     def display_seats(self):
         for row in self.__seats:

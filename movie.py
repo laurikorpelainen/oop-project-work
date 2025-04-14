@@ -1,5 +1,5 @@
 class Movie:
-    __id_counter = 1
+    __id_counter = 0
 
     def __init__(self, title: str, length, director: str, genre: str, age_rating: int):
         self.__title = title

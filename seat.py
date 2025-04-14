@@ -1,7 +1,7 @@
 class Seat:
-    def __init__(self, row, collumn):
+    def __init__(self, row, column):
         self.__row = row
-        self.__collumn = collumn
+        self.__column = column
         self.__is_reserved = False
 
     @property
@@ -10,7 +10,7 @@ class Seat:
 
     @property
     def collumn(self):
-        return self.__collumn
+        return self.__column
 
     def reserve_seat(self):
         self.__is_reserved = True
