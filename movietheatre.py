@@ -1,10 +1,9 @@
 class MovieTheatre:
     __id_counter = 0
 
-    def __init__(self, name: str, city: str, hall_amount: int):
+    def __init__(self, name: str, city: str):
         self.__name = name
         self.__city = city
-        self.__hall_amount = hall_amount
         MovieTheatre.__id_counter += 1
 
     @property

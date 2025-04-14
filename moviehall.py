@@ -1,9 +1,10 @@
 from seat import Seat
+
 class MovieHall:
     __id_counter = 0
 
     def __init__(self, type, rows: int, columns: int):
-        self.__type = type # Type will be child class
+        self.__type = type
         self.__rows = rows
         self.__columns = columns
         self.__seats = [[Seat(row, column) for column in range(self.__columns)] for row in range(self.__rows)]
@@ -22,7 +23,7 @@ class MovieHall:
         return self.__seats
     
     def reserve_seat(self, row, column):
-        self.__seats[row][column].reserve_seat()
+        self.__seats[row-1][column-1].reserve_seat()
 
     def display_seats(self):
         for row in self.__seats:

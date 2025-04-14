@@ -18,8 +18,5 @@ class User:
     def age(self):
         return self.__age
     
-    def is_adult(self):
-        return self.__age > 18
-    
     def __str__(self):
         return f"User ID: {self.__id_counter}, Name: {self.__name}, Age: {self.__age}"

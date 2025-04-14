@@ -1,7 +1,7 @@
 class Movie:
     __id_counter = 0
 
-    def __init__(self, title: str, length, director: str, genre: str, age_rating: int):
+    def __init__(self, title: str, length: int, director: str, genre: str, age_rating: int):
         self.__title = title
         self.__length = length
         self.__director = director
@@ -30,4 +30,4 @@ class Movie:
         return self.__age_rating
 
     def __str__(self):
-        return f"Movie ID: {self.__id_counter}, Title: {self.__title}, Director: {self.__director}, Genre: {self.__genre}, Length: {self.__length}"
+        return f"Movie ID: {self.__id_counter}, Title: {self.__title}, Director: {self.__director}, Genre: {self.__genre}, Length: {self.__length}, Age-rating: {self.__age_rating}"
