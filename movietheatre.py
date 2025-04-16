@@ -4,6 +4,8 @@ class MovieTheatre:
     def __init__(self, name: str, city: str):
         self.__name = name
         self.__city = city
+        self.__halls = []
+        self.__screenings = []
         MovieTheatre.__id_counter += 1
 
     @property
@@ -19,9 +21,19 @@ class MovieTheatre:
         return self.__city
     
     @property
-    def hall_amount(self):
-        return self.__hall_amount
+    def halls(self):
+        return self.__halls
+    
+    @property
+    def screenigns(self):
+        return self.__screenings
+    
+    def add_screening(self, screening: object):
+        self.__screenings.append(screening)
+
+    def add_theater(self, hall: object):
+        self.__halls.append(hall)
     
     def __str__(self):
-        return f"Theater ID: {self.__id_counter}, Name: {self.__name}, City: {self.__city}, Hall amount: {self.__hall_amount}"
+        return f"Theater ID: {self.__id_counter}, Name: {self.__name}, City: {self.__city}"
         

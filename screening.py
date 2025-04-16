@@ -1,14 +1,19 @@
 class Screening:
     __id_counter = 0
     
-    def __init__(self, movie, hall, time, date):
+    def __init__(self, movie: str, hall, time, date, theater):
         self.__movie = movie
         self.__hall = hall
         self.__time = time
         self.__date = date
+        self.__theater = theater
         Screening.__id_counter += 1
         self.__id = Screening.__id_counter
     
+    @property
+    def theater(self):
+        return self.__theater
+
     @property
     def id(self):
         return self.__id
