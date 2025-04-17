@@ -2,7 +2,6 @@ from config import testing
 from moviehall import MovieHall
 from movietheatre import MovieTheatre
 from movie import Movie
-from datetime import datetime
 class Screening:
     __id_counter = 0
     
