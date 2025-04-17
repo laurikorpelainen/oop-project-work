@@ -1,12 +1,8 @@
 from movietheatre import MovieTheatre
 from moviehall import MovieHall
-from standardhall import StandardHall
-from premiumhall import PremiumHall
 from movie import Movie
-from seat import Seat
 from user import User
 from screening import Screening
-from datetime import datetime
 from config import testing
 
 class Booking:
