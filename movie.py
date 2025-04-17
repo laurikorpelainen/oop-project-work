@@ -1,7 +1,16 @@
+from config import testing
 class Movie:
     __id_counter = 0
 
     def __init__(self, title: str, length: int, director: str, genre: str, age_rating: int):
+
+        if testing:
+            assert isinstance(title, str) and len(title) > 0, "Title must be a non-empty string"
+            assert isinstance(length, int) and length > 0, "Length must be a positive integer"
+            assert isinstance(director, str) and len(director) > 0, "Director must be a non-empty string"
+            assert isinstance(genre, str) and len(genre) > 0, "Genre must be a non-empty string"
+            assert isinstance(age_rating, int) and age_rating >= 0, "Age rating must be a non-negative integer"
+
         self.__title = title
         self.__length = length
         self.__director = director
