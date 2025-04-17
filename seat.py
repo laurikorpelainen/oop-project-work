@@ -9,7 +9,7 @@ class Seat:
         return self.__row
 
     @property
-    def collumn(self):
+    def column(self):
         return self.__column
     
     @property
