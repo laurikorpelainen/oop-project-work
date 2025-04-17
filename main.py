@@ -9,12 +9,15 @@ import datetime
 def main():
     app = Booking()
     
-    theater1 = app.add_theater(MovieTheatre("Finnkino", "Turku"))
-    theater2 = app.add_theater(MovieTheatre("Finnkino", "Raisio"))
-    
     std_hall1 = StandardHall(rows=5, columns=10)
     std_hall2 = StandardHall(rows=6, columns=8)
     premium_hall = PremiumHall(rows=4, columns=8)
+    premium_hall2 = PremiumHall(rows=5, columns=10)
+    turku_halls = [std_hall1, premium_hall]
+    raisio_halls = [std_hall2, premium_hall2]
+
+    theater1 = app.add_theater(MovieTheatre("Finnkino", "Turku", turku_halls))
+    theater2 = app.add_theater(MovieTheatre("Finnkino", "Raisio", raisio_halls))
     
     movie1 = app.add_movie(Movie("The Matrix", 136, "Wachowski Brothers", "Sci-Fi", 13))
     movie2 = app.add_movie(Movie("Toy Story", 81, "John Lasseter", "Animation", 0))
@@ -23,10 +26,10 @@ def main():
     today = datetime.date.today()
     tomorrow = today + datetime.timedelta(days=1)
     
-    app.create_screening(theater1, movie1, std_hall1, "18:00", today)
-    app.create_screening(theater1, movie1, premium_hall, "21:00", today)
-    app.create_screening(theater2, movie2, std_hall2, "15:30", today)
-    app.create_screening(theater2, movie3, premium_hall, "19:30", tomorrow)
+    app.create_screening(theater1, movie1, theater1.halls[0], "18:00", today)
+    app.create_screening(theater1, movie1, theater1.halls[1], "21:00", today)
+    app.create_screening(theater2, movie2, theater2.halls[0], "15:30", today)
+    app.create_screening(theater2, movie3, theater2.halls[1], "19:30", tomorrow)
     
     selected_theater = None
     
