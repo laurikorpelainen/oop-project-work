@@ -15,7 +15,7 @@ class Booking:
         self.__user = None
         self.__theaters = []
         self.__movies = []
-        self.__screenings = []
+        self.__screenings = {}
         self.__bookings = []
     
     def register_user(self, user):
@@ -31,9 +31,9 @@ class Booking:
         self.__movies.append(movie)
         return movie
     
-    def create_screening(self, theater, movie, hall, time, date):
+    def create_screening(self, theater: object, movie: object, hall: object, time, date):
         Booking.__screening_id_counter += 1
-        screening = Screening(Screening.Booking.__screening_id_counter, movie, hall,time,date)
+        screening = Screening(movie, hall, time, date, theater)
         self.__screenings[theater].append(screening)
         return screening
     
@@ -43,8 +43,9 @@ class Booking:
             return None, "User is too young for this movie"
         
         # Check if user has enough balance to buy a ticket
-        if user.balance < screening.hall.ticket_price:
-            return None, f"User balance too low. Current balance {user.balance}"
+        total_price = screening.hall.ticket_price * len(seats)
+        if user.balance < total_price:
+            return None, f"User balance too low. Need {total_price}, current balance {user.balance}"
         
         # Check if seats are valid and available
         for row, col in seats:
@@ -58,7 +59,7 @@ class Booking:
             screening.hall.reserve_seat(row, column)
 
         #Reduce ticket price from user balance
-        user.decrease_funds(screening.hall.ticket_price)
+        user.decrease_funds(total_price)
             
         Booking.__booking_id_counter += 1
         booking = {

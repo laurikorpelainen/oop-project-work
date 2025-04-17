@@ -72,7 +72,7 @@ def main():
                 continue
                 
             screenings = app.get_screenings(selected_theater)
-            available_movies = list({screening['movie'] for screening in screenings})
+            available_movies = list({screening.movie for screening in screenings})
             
             if not available_movies:
                 print("No movies available in this theater.")
@@ -85,7 +85,7 @@ def main():
             movie_idx = int(input("Select movie (number): ")) - 1
             selected_movie = available_movies[movie_idx]
             
-            movie_screenings = [s for s in screenings if s["movie"] == selected_movie]
+            movie_screenings = [s for s in screenings if s.movie == selected_movie]
             
             print("Available screenings:")
             for i, screening in enumerate(movie_screenings):
@@ -95,7 +95,7 @@ def main():
             selected_screening = movie_screenings[screening_idx]
 
             print("Current seat reservation (0 = available, 1 = reserved):")
-            selected_screening["hall"].display_seats()
+            selected_screening.hall.display_seats()
             
             num_seats = int(input("How many seats do you want to book? "))
             seats = []
@@ -126,7 +126,7 @@ def main():
 
         elif choice == "5":
             screenings = app.get_screenings(selected_theater)
-            available_movies = list({screening['movie'] for screening in screenings})
+            available_movies = list({screening.movie for screening in screenings})
             
             if not available_movies:
                 print("No movies available in this theater.")
@@ -139,7 +139,7 @@ def main():
             movie_idx = int(input("Select movie (number): ")) - 1
             selected_movie = available_movies[movie_idx]
             
-            movie_screenings = [s for s in screenings if s["movie"] == selected_movie]
+            movie_screenings = [s for s in screenings if s.movie == selected_movie]
             
             print("Available screenings:")
             for i, screening in enumerate(movie_screenings):
@@ -148,7 +148,7 @@ def main():
             screening_idx = int(input("Select screening (number): ")) - 1
             selected_screening = movie_screenings[screening_idx]
 
-            selected_screening["hall"].display_seats()
+            selected_screening.hall.display_seats()
 
         
         elif choice == "6":
