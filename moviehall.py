@@ -1,9 +1,16 @@
 from seat import Seat
-
+from config import testing
 class MovieHall:
     __id_counter = 0
 
     def __init__(self, type, rows: int, columns: int, ticket_price: float):
+
+        if testing:
+            assert isinstance(type, str) and len(type) > 0, "Type must be a non-empty string"
+            assert isinstance(rows, int) and rows > 0, "Rows must be a positive integer"
+            assert isinstance(columns, int) and columns > 0, "Columns must be a positive integer"
+            assert isinstance(ticket_price, float) and ticket_price >= 0, "Ticket price must be a non-negative float"
+
         self.__type = type
         self.__rows = rows
         self.__columns = columns
@@ -27,7 +34,12 @@ class MovieHall:
     def ticket_price(self):
         return self.__ticket_price
     
-    def reserve_seat(self, row, column):
+    def reserve_seat(self, row: int, column: int):
+
+        if testing:
+            assert isinstance(row, int) and row > 0, 'Row must be a positive integer bigger than 0'
+            assert isinstance(column, int) and column >= 1, 'Column must be a positive integer bigger than 0'
+
         self.__seats[row-1][column-1].reserve_seat()
 
     def display_seats(self):
