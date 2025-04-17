@@ -1,10 +1,10 @@
 class MovieTheatre:
     __id_counter = 0
 
-    def __init__(self, name: str, city: str):
+    def __init__(self, name: str, city: str, halls: list):
         self.__name = name
         self.__city = city
-        self.__halls = []
+        self.__halls = halls
         self.__screenings = []
         MovieTheatre.__id_counter += 1
 
