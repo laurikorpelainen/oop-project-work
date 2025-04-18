@@ -1,7 +1,7 @@
 from config import testing
 from moviehall import MovieHall
 class MovieTheatre:
-    __id_counter = 0
+    __id_counter = 0    # Counter to assign unique IDs
 
     def __init__(self, name: str, city: str, halls: list):
 
@@ -15,7 +15,7 @@ class MovieTheatre:
         self.__city = city
         self.__halls = halls
         self.__screenings = []
-        MovieTheatre.__id_counter += 1
+        MovieTheatre.__id_counter += 1 # Increment global movie ID counter
 
     @property
     def theater_id(self):
