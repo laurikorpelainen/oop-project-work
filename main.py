@@ -28,6 +28,11 @@ def main():
     movie1 = app.add_movie(Movie("The Matrix", 136, "Wachowski Brothers", "Sci-Fi", 13))
     movie2 = app.add_movie(Movie("Toy Story", 81, "John Lasseter", "Animation", 0))
     movie3 = app.add_movie(Movie("The Shawshank Redemption", 142, "Frank Darabont", "Drama", 16))
+    movie4 = app.add_movie(Movie("Inception", 148, "Christopher Nolan", "Sci-Fi", 13))
+    movie5 = app.add_movie(Movie("John Wick", 101, "Chad Stahelski", "Action", 16))
+    movie6 = app.add_movie(Movie("The Lion King", 88, "Roger Allers", "Animation", 0))
+    movie7 = app.add_movie(Movie("A Quiet Place", 90, "John Krasinski", "Horror", 13))
+    movie8 = app.add_movie(Movie("Bridesmaids", 125, "Paul Feig", "Comedy", 13))
     
     # Set up screening dates
     today = datetime.date.today()
@@ -36,8 +41,16 @@ def main():
     # Create screenings for the movies
     app.create_screening(theater1, movie1, theater1.halls[0], "18:00", today)
     app.create_screening(theater1, movie1, theater1.halls[1], "21:00", today)
+    app.create_screening(theater1, movie4, theater1.halls[1], "18:00", tomorrow)
+    app.create_screening(theater1, movie7, theater1.halls[0], "21:00", today)
+    app.create_screening(theater1, movie7, theater1.halls[0], "21:00", tomorrow)
+    app.create_screening(theater1, movie8, theater1.halls[1], "21:00", tomorrow)
+
     app.create_screening(theater2, movie2, theater2.halls[0], "15:30", today)
     app.create_screening(theater2, movie3, theater2.halls[1], "19:30", tomorrow)
+    app.create_screening(theater2, movie6, theater2.halls[0], "18:00", today)
+    app.create_screening(theater2, movie5, theater2.halls[1], "16:30", today)
+    app.create_screening(theater2, movie8, theater2.halls[1], "16:30", tomorrow)
     
     selected_theater = None # No theater selected yet
     
@@ -48,7 +61,7 @@ def main():
         print("2. Select theater")
         print("3. Book tickets")
         print("4. View user bookings")
-        print("5. Display available seats")
+        print("5. View seating")
         print("6. Display hall features")
         print("7. Display balance")
         print("8. Add balance")
@@ -105,7 +118,7 @@ def main():
             print("Available screenings:")
 
             for i, screening in enumerate(movie_screenings):
-                print(f"{i+1}. {app.format_screening_str(screening)}")
+                print(f"{i+1}. {app.format_screening_str(screening)}, Hall: {screening.hall.type}, Ticket price: {screening.hall.ticket_price}€ ")
 
             screening_idx = int(input("Select screening (number): ")) - 1
             selected_screening = movie_screenings[screening_idx]
@@ -164,7 +177,7 @@ def main():
             
             print("Available screenings:")
             for i, screening in enumerate(movie_screenings):
-                print(f"{i+1}. {app.format_screening_str(screening)}")
+                print(f"{i+1}. {app.format_screening_str(screening)}, Hall: {screening.hall.type}")
 
             screening_idx = int(input("Select screening (number): ")) - 1
             selected_screening = movie_screenings[screening_idx]
@@ -198,7 +211,7 @@ def main():
                 print("No user registered. Please register a user first.")
                 continue
 
-            print(f"Your balance is: {app.user.balance} €")
+            print(f"Your balance is: {float(app.user.balance):.2f} €")
 
 
         elif choice == "8":
