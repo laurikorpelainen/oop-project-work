@@ -46,5 +46,8 @@ class MovieHall:
         for row in self.__seats:
             print(" ".join(str(seat) for seat in row))
 
+    def get_hall_features(self) -> list[str]:
+        return [f"{self.__rows * self.__columns} seats"]
+
     def __str__(self):
         return f"Moviehall ID: {self.__id_counter}, Moviehall type: {self.__type}"
