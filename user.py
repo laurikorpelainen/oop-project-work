@@ -30,6 +30,7 @@ class User:
         return self.__balance
     
     def add_funds(self, amount: float):
+        """Adds amount of funds to users balance"""
         if testing:
             assert isinstance(amount, float) and amount > 0, "Amount must be a positive float"
 
@@ -37,6 +38,7 @@ class User:
         return f"{amount}€ added \nCurrent balance now is {self.__balance}€"
 
     def decrease_funds(self, amount: float):
+        """Decreases amount of funds from users balance"""
         if testing:
             assert isinstance(amount, float) and amount > 0, "Amount must be a positive float"
             assert self.__balance >= amount, "Insufficient funds"
@@ -44,4 +46,5 @@ class User:
         self.__balance -= amount
     
     def __str__(self):
+        """String representation of user instance"""
         return f"User ID: {self.__id_counter}, Name: {self.__name}, Age: {self.__age}"
