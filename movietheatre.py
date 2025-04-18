@@ -34,7 +34,7 @@ class MovieTheatre:
         return self.__halls
     
     @property
-    def screenigns(self):
+    def screenings(self):
         return self.__screenings
     
     def add_screening(self, screening: object):
@@ -43,7 +43,7 @@ class MovieTheatre:
 
         self.__screenings.append(screening)
 
-    def add_theater(self, hall: MovieHall):
+    def add_hall(self, hall: MovieHall):
         if testing:
             assert isinstance(hall, MovieHall), 'Hall must be a MovieHall object'
 
