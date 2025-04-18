@@ -34,6 +34,7 @@ class User:
             assert isinstance(amount, float) and amount > 0, "Amount must be a positive float"
 
         self.__balance += amount
+        return f"{amount}€ added \nCurrent balance now is {self.__balance}€"
 
     def decrease_funds(self, amount: float):
         if testing:
