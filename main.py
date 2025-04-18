@@ -177,7 +177,7 @@ def main():
             
             print("Available screenings:")
             for i, screening in enumerate(movie_screenings):
-                print(f"{i+1}. {app.format_screening_str(screening)}")
+                print(f"{i+1}. {app.format_screening_str(screening)}, Hall: {screening.hall.type}")
 
             screening_idx = int(input("Select screening (number): ")) - 1
             selected_screening = movie_screenings[screening_idx]
@@ -211,7 +211,7 @@ def main():
                 print("No user registered. Please register a user first.")
                 continue
 
-            print(f"Your balance is: {app.user.balance} €")
+            print(f"Your balance is: {float(app.user.balance):.2f} €")
 
 
         elif choice == "8":

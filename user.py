@@ -31,7 +31,7 @@ class User:
     
     @property
     def balance(self):
-        return self.__balance
+        return f"{self.__balance:2f}"
     
     def add_funds(self, amount: float):
         # Adds amount of funds to users balance
@@ -39,7 +39,7 @@ class User:
             assert isinstance(amount, float) and amount > 0, "Amount must be a positive float"
 
         self.__balance += amount
-        return f"{amount}€ added \nCurrent balance now is {self.__balance}€"
+        return f"{amount}€ added \nCurrent balance now is {self.__balance:.2f}€"
 
     def decrease_funds(self, amount: float):
         # Decreases amount of funds from users balance
