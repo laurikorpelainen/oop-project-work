@@ -3,6 +3,10 @@ from moviehall import MovieHall
 from movietheatre import MovieTheatre
 from movie import Movie
 class Screening:
+    """
+    Defines the Screening class representing a scheduled movie showing.
+    Includes information about the movie, hall, theater, time, and date.
+    """
     __id_counter = 0    # Counter to assign unique IDs
     
     def __init__(self, movie: Movie, hall: MovieHall, time: str, date: object, theater: MovieTheatre):

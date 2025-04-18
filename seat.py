@@ -1,7 +1,11 @@
 from config import testing
 class Seat:
+    """
+    Defines the Seat class representing a single seat in a movie hall.
+    Includes reservation status tracking and seat identification by row and column.
+    """
     def __init__(self, row: int, column: int):
-        """Initializes seat object based on parameters"""
+        # Initializes a Seat object with specified row and column position
         if testing:
             assert isinstance(row, int) and row >= 0, 'Row must be a postive integer'
             assert isinstance(column, int) and column >= 0, 'Row must be a positive integer'
@@ -23,11 +27,11 @@ class Seat:
         return self.__is_reserved
 
     def reserve_seat(self):
-        """Changes seat reservation status to reserved"""
+        # Changes seat reservation status to reserved
         self.__is_reserved = True
 
     def __str__(self):
-        """Returns 0/1 in str format based on seat reservation status"""
+        # Returns 0/1 in str format based on seat reservation status
         if self.__is_reserved == True:
             return "1"
         return "0"
