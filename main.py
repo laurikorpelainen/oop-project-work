@@ -7,18 +7,24 @@ from user import User
 import datetime
 
 def main():
+    # Initialize the booking system
     app = Booking()
     
+    # Create movie halls
     std_hall1 = StandardHall(rows=5, columns=10)
     std_hall2 = StandardHall(rows=6, columns=8)
     premium_hall = PremiumHall(rows=4, columns=8)
     premium_hall2 = PremiumHall(rows=5, columns=10)
+
+    # Assign halls to cities
     turku_halls = [std_hall1, premium_hall]
     raisio_halls = [std_hall2, premium_hall2]
 
+    # Add theaters to the booking system
     theater1 = app.add_theater(MovieTheatre("Finnkino", "Turku", turku_halls))
     theater2 = app.add_theater(MovieTheatre("Finnkino", "Raisio", raisio_halls))
     
+    # Add movies
     movie1 = app.add_movie(Movie("The Matrix", 136, "Wachowski Brothers", "Sci-Fi", 13))
     movie2 = app.add_movie(Movie("Toy Story", 81, "John Lasseter", "Animation", 0))
     movie3 = app.add_movie(Movie("The Shawshank Redemption", 142, "Frank Darabont", "Drama", 16))
@@ -28,9 +34,11 @@ def main():
     movie7 = app.add_movie(Movie("A Quiet Place", 90, "John Krasinski", "Horror", 13))
     movie8 = app.add_movie(Movie("Bridesmaids", 125, "Paul Feig", "Comedy", 13))
     
+    # Set up screening dates
     today = datetime.date.today()
     tomorrow = today + datetime.timedelta(days=1)
     
+    # Create screenings for the movies
     app.create_screening(theater1, movie1, theater1.halls[0], "18:00", today)
     app.create_screening(theater1, movie1, theater1.halls[1], "21:00", today)
     app.create_screening(theater1, movie4, theater1.halls[1], "18:00", tomorrow)
@@ -44,8 +52,9 @@ def main():
     app.create_screening(theater2, movie5, theater2.halls[1], "16:30", today)
     app.create_screening(theater2, movie8, theater2.halls[1], "16:30", tomorrow)
     
-    selected_theater = None
+    selected_theater = None # No theater selected yet
     
+    # User interaction loop
     while True:
         print("\nMOVIE BOOKING APP")
         print("1. Register as a user")
@@ -61,7 +70,7 @@ def main():
         choice = input("Enter your choice: ")
         
         if choice == "1":
-
+            # Register user
             name = input("Enter name: ")
             age = int(input("Enter age: "))
             user = app.register_user(User(name, age, 100.0))
@@ -70,7 +79,7 @@ def main():
         
 
         elif choice == "2":
-
+            # Select a theater
             print("Available theaters:")
             for i, theater in enumerate(app.get_theaters()):
                 print(f"{i+1}. {theater.name} ({theater.city})")
@@ -81,7 +90,7 @@ def main():
         
 
         elif choice == "3":
-
+            # Book tickets
             if not app.user:
                 print("No user registered. Please register a user first.")
                 continue
@@ -96,6 +105,7 @@ def main():
                 print("No movies available in this theater.")
                 continue
             
+            # List available movies
             print("Available movies:")
             for i, movie in enumerate(available_movies):
                 print(f"{i+1}. {movie.title}")
@@ -103,18 +113,21 @@ def main():
             movie_idx = int(input("Select movie (number): ")) - 1
             selected_movie = available_movies[movie_idx]
             
+            # Show screenings for selected movie
             movie_screenings = [s for s in screenings if s.movie == selected_movie]
-            
             print("Available screenings:")
+
             for i, screening in enumerate(movie_screenings):
                 print(f"{i+1}. {app.format_screening_str(screening)}, Hall: {screening.hall.type}, Ticket price: {screening.hall.ticket_price}€ ")
 
             screening_idx = int(input("Select screening (number): ")) - 1
             selected_screening = movie_screenings[screening_idx]
 
+            # Show seat layout
             print("Current seat reservation (0 = available, 1 = reserved):")
             selected_screening.hall.display_seats()
             
+            # Select seats
             num_seats = int(input("How many seats do you want to book? "))
             seats = []
             
@@ -124,6 +137,7 @@ def main():
                 col = int(input(f"Enter column for seat {i+1}: "))
                 seats.append((row, col))
             
+            # Attempt booking
             booking, message = app.create_booking(app.user, selected_screening, seats)
             print(message)
 
@@ -132,6 +146,7 @@ def main():
 
 
         elif choice == "4":
+            # Show user's bookings
             bookings = app.get_user_bookings(app.user)
             print(f"Bookings for {app.user.name}:")
 
@@ -143,6 +158,7 @@ def main():
 
 
         elif choice == "5":
+            # Show seat availability
             screenings = app.get_screenings(selected_theater)
             available_movies = list({screening.movie for screening in screenings})
             
@@ -170,6 +186,7 @@ def main():
 
 
         elif choice == "6":
+            # Display features of a selected hall in the theater
             print("Available theaters:")
             for i, theater in enumerate(app.get_theaters()):
                 print(f"{i+1}. {theater.name} ({theater.city})")
@@ -189,6 +206,7 @@ def main():
         
 
         elif choice == "7":
+            # Display the current user's balance
             if not app.user:
                 print("No user registered. Please register a user first.")
                 continue
@@ -197,6 +215,7 @@ def main():
 
 
         elif choice == "8":
+            # Add funds to user account
             if not app.user:
                 print("No user registered. Please register a user first.")
                 continue
@@ -206,9 +225,9 @@ def main():
 
 
         elif choice == "0":
+            # Exit app
             print("Thank you for using the Movie Booking App!")
             break 
-         
          
         else:
             print("Invalid choice, please try again")

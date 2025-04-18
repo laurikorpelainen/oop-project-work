@@ -6,10 +6,15 @@ from screening import Screening
 from config import testing
 
 class Booking:
-    __booking_id_counter = 0
-    __screening_id_counter = 0
+    """
+    This defines the Booking class to handle all movie ticket booking operations including
+    user registration, theater/movie/screening management, seat reservations, and payment handling.
+    """
+    __booking_id_counter = 0    # Tracks booking ID for uniqueness
+    __screening_id_counter = 0  # Tracks screening ID for uniqueness
     
     def __init__(self):
+        # Initialize internal storage for booking system data
         self.__user: User = None
         self.__theaters: list[MovieTheatre] = []
         self.__movies: list[Movie] = []
@@ -18,6 +23,7 @@ class Booking:
     
 
     def register_user(self, user: User) -> User:
+        # Register a new user to the system
         if testing:
             assert isinstance(user, User), "User must be a User object"
 
@@ -26,6 +32,7 @@ class Booking:
         
 
     def add_theater(self, theater: MovieTheatre) -> MovieTheatre:
+        # Add a new movie theater and initialize its screening list
         if testing:
             assert isinstance(theater, MovieTheatre), "Theater must be a MovieTheatre object"
 
@@ -35,6 +42,7 @@ class Booking:
     
 
     def add_movie(self, movie: Movie) -> Movie:
+        # Add a movie to the system
         if testing:
             assert isinstance(movie, Movie), "Movie must be a Movie object"
 
@@ -43,6 +51,7 @@ class Booking:
     
 
     def create_screening(self, theater: MovieTheatre, movie: Movie, hall: MovieHall, time: str, date: object) -> Screening:
+        # Schedule a movie screening in a specific hall at a specific time/date
         if testing:
             assert isinstance(theater, MovieTheatre), "Theater must be a MovieTheatre object"
             assert isinstance(movie, Movie), "Movie must be a Movie object"
@@ -60,6 +69,7 @@ class Booking:
     
 
     def create_booking(self, user: User, screening: Screening, seats: list[tuple[int, int]]) -> tuple[dict, str]:
+        # Book selected seats for a user in a specific screening
         if testing:
             assert isinstance(user, User), 'User must be a User object'
             assert isinstance(screening, Screening), 'Screening must be a Screening object'
@@ -86,7 +96,7 @@ class Booking:
         for row, column in seats:
             screening.hall.reserve_seat(row, column)
 
-        #Reduce ticket price from user balance
+        # Reduce ticket price from user balance
         user.decrease_funds(total_price)
             
         Booking.__booking_id_counter += 1
@@ -103,18 +113,19 @@ class Booking:
 
     @property
     def user(self):
+        # Get the currently registered user
         return self.__user
-    
 
     def get_theaters(self):
+        # Return list of added theaters
         return self.__theaters
-    
 
     def get_movies(self):
+        # Return list of added movies
         return self.__movies
-    
 
     def get_screenings(self, theater=None):
+        # Return screenings for a specific theater or all if not specified
         if theater:
             return self.__screenings.get(theater, [])
         else:
@@ -122,20 +133,20 @@ class Booking:
             for theater_screenings in self.__screenings.values():
                 all_screenings.extend(theater_screenings)
             return all_screenings
-    
 
     def get_bookings(self):
+        # Return all bookings
         return self.__bookings
-    
 
     def get_user_bookings(self, user: User) -> list:
+        # Return bookings for a specific user
         if testing:
             assert isinstance(user, User), 'User must a User object'
 
         return [booking for booking in self.__bookings if booking["user"] == user]
-    
 
     def format_booking_str(self, booking: dict) -> str:
+        # Convert a booking dictionary to a readable string
         if testing:
             assert isinstance(booking, dict), "Booking must be a dictionary"
             
@@ -143,8 +154,8 @@ class Booking:
         return f"Booking ID: {booking['id']}, User: {booking['user'].name}, " \
                f"Movie: {booking['screening'].movie.title}, Seats: {seats_str}"
 
-
     def format_screening_str(self, screening: Screening) -> str:
+        # Convert a screening object to a readable string
         if testing:
             assert isinstance(screening, Screening), "Screening must be a Screening object"
 
