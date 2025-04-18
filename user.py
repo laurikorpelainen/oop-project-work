@@ -1,6 +1,6 @@
 from config import testing
 class User:
-    __id_counter = 0
+    __id_counter = 0    # Counter to assign unique IDs
 
     def __init__(self, name: str, age: int, balance: float):
         if testing:
@@ -11,7 +11,7 @@ class User:
         self.__name = name
         self.__age = age
         self.__balance = balance
-        User.__id_counter += 1
+        User.__id_counter += 1  # Increment global movie ID counter
 
     @property
     def user_id(self):

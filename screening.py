@@ -3,7 +3,7 @@ from moviehall import MovieHall
 from movietheatre import MovieTheatre
 from movie import Movie
 class Screening:
-    __id_counter = 0
+    __id_counter = 0    # Counter to assign unique IDs
     
     def __init__(self, movie: Movie, hall: MovieHall, time: str, date: object, theater: MovieTheatre):
         if testing:
@@ -19,7 +19,7 @@ class Screening:
         self.__date = date
         self.__theater = theater
         Screening.__id_counter += 1
-        self.__id = Screening.__id_counter
+        self.__id = Screening.__id_counter  # Increment global movie ID counter
     
     @property
     def theater(self):
@@ -46,4 +46,5 @@ class Screening:
         return self.__date
     
     def __str__(self):
+        # String representation of the Screening instance
         return f"Screening ID: {self.__id}, Movie: {self.__movie.title}, Date: {self.__date}, Time: {self.__time}"

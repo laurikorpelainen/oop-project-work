@@ -173,6 +173,7 @@ def main():
 
 
         elif choice == "6":
+            # Display features of a selected hall in the theater
             print("Available theaters:")
             for i, theater in enumerate(app.get_theaters()):
                 print(f"{i+1}. {theater.name} ({theater.city})")
@@ -192,7 +193,7 @@ def main():
         
 
         elif choice == "7":
-            # Show user balance
+            # Display the current user's balance
             if not app.user:
                 print("No user registered. Please register a user first.")
                 continue
@@ -201,6 +202,7 @@ def main():
 
 
         elif choice == "8":
+            # Add funds to user account
             if not app.user:
                 print("No user registered. Please register a user first.")
                 continue
@@ -213,7 +215,6 @@ def main():
             # Exit app
             print("Thank you for using the Movie Booking App!")
             break 
-         
          
         else:
             print("Invalid choice, please try again")
