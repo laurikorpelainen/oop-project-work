@@ -40,8 +40,9 @@ def main():
         print("3. Book tickets")
         print("4. View user bookings")
         print("5. Display available seats")
-        print("6. Display balance")
-        print("7. Display hall features")
+        print("6. Display hall features")
+        print("7. Display balance")
+        print("8. Add balance")
         print("0. Exit\n")
 
         choice = input("Enter your choice: ")
@@ -154,15 +155,8 @@ def main():
 
             selected_screening.hall.display_seats()
 
-        
+
         elif choice == "6":
-            if not app.user:
-                print("No user registered. Please register a user first.")
-                continue
-
-            print(f"Your balance is: {app.user.balance} €")
-
-        elif choice == "7":
             print("Available theaters:")
             for i, theater in enumerate(app.get_theaters()):
                 print(f"{i+1}. {theater.name} ({theater.city})")
@@ -179,6 +173,23 @@ def main():
             print("\nHALL FEATURES")
             for feature in selected_theater.halls[hall_idx].get_hall_features():
                 print(feature)
+        
+
+        elif choice == "7":
+            if not app.user:
+                print("No user registered. Please register a user first.")
+                continue
+
+            print(f"Your balance is: {app.user.balance} €")
+
+
+        elif choice == "8":
+            if not app.user:
+                print("No user registered. Please register a user first.")
+                continue
+
+            amount = float(input("How much balance would you like to add? "))
+            print(app.user.add_funds(amount))
 
 
         elif choice == "0":
