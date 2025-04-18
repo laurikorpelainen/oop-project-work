@@ -1,7 +1,13 @@
+from config import testing
 class User:
     __id_counter = 0
 
     def __init__(self, name: str, age: int, balance: float):
+        if testing:
+            assert isinstance(name, str) and len(name) > 0, "Name must be a non-empty string"
+            assert isinstance(age, int) and age >= 0, "Age must be a non-negative integer"
+            assert isinstance(balance, float) and balance >= 0, "Balance must be a non-negative float"
+
         self.__name = name
         self.__age = age
         self.__balance = balance
@@ -24,9 +30,16 @@ class User:
         return self.__balance
     
     def add_funds(self, amount: float):
+        if testing:
+            assert isinstance(amount, float) and amount > 0, "Amount must be a positive float"
+
         self.__balance += amount
 
     def decrease_funds(self, amount: float):
+        if testing:
+            assert isinstance(amount, float) and amount > 0, "Amount must be a positive float"
+            assert self.__balance >= amount, "Insufficient funds"
+
         self.__balance -= amount
     
     def __str__(self):

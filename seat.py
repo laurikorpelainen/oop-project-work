@@ -1,5 +1,10 @@
+from config import testing
 class Seat:
-    def __init__(self, row, column):
+    def __init__(self, row: int, column: int):
+        if testing:
+            assert isinstance(row, int) and row >= 0, 'Row must be a postive integer'
+            assert isinstance(column, int) and column >= 0, 'Row must be a positive integer'
+
         self.__row = row
         self.__column = column
         self.__is_reserved = False
