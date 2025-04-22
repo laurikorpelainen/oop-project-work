@@ -31,7 +31,10 @@ class User:
     
     @property
     def balance(self):
-        return f"{self.__balance:2f}"
+        return self.__balance
+    
+    def get_formatted_balance(self):
+        return f"{self.__balance:.2f}"
     
     def add_funds(self, amount: float):
         # Adds amount of funds to users balance

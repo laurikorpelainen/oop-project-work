@@ -211,7 +211,7 @@ def main():
                 print("No user registered. Please register a user first.")
                 continue
 
-            print(f"Your balance is: {float(app.user.balance):.2f} €")
+            print(f"Your balance is: {app.user.get_formatted_balance()} €")
 
 
         elif choice == "8":
